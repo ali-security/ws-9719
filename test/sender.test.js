@@ -439,6 +439,16 @@ describe('Sender', () => {
       );
     });
 
+    it('throws an error if the second argument is invalid', () => {
+      const mockSocket = new MockSocket();
+      const sender = new Sender(mockSocket);
+
+      assert.throws(
+        () => sender.close(1000, new Float32Array(20)),
+        /^TypeError: Second argument must be a string or a Uint8Array$/
+      );
+    });
+
     it('throws an error if the message is greater than 123 bytes', () => {
       const mockSocket = new MockSocket();
       const sender = new Sender(mockSocket);
